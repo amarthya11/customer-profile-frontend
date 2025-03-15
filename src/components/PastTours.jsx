@@ -10,7 +10,15 @@ const PastTours = ({ theme }) => {
       const storedUser = JSON.parse(localStorage.getItem("customer"));
       if (storedUser) {
         try {
-          const response = await axios.get(`http://localhost:8080/api/customers/${storedUser.id}/past-tours`);
+          const response = await axios.get(
+            `http://localhost:8080/api/customers/${storedUser.id}/past-tours`,
+            {
+              auth: {
+                username: 'user', // Hardcoded username
+                password: 'password' // Hardcoded password
+              }
+            }
+          );
           setPastTours(response.data);
         } catch (error) {
           console.error("Error fetching past tours:", error);

@@ -16,11 +16,21 @@ const Dashboard = ({ theme, handleThemeToggle }) => {
       const storedUser = JSON.parse(localStorage.getItem("customer"));
       if (storedUser) {
         try {
-          const response = await axios.get(`http://localhost:8080/api/customers/${storedUser.id}`);
+          const response = await axios.get(`http://localhost:8080/api/customers/${storedUser.id}`, {
+            auth: {
+              username: 'user', // Hardcoded username
+              password: 'password' // Hardcoded password
+            }
+          });
           setUser(response.data);
           setEditedUser(response.data);
-
-          const picResponse = await axios.get(`http://localhost:8080/api/customers/${storedUser.id}/profile-picture`);
+    
+          const picResponse = await axios.get(`http://localhost:8080/api/customers/${storedUser.id}/profile-picture`, {
+            auth: {
+              username: 'user', // Hardcoded username
+              password: 'password' // Hardcoded password
+            }
+          });
           if (picResponse.data && picResponse.data !== "null") {
             setProfilePicture(`http://localhost:8080${picResponse.data}`);
           }
@@ -38,7 +48,12 @@ const Dashboard = ({ theme, handleThemeToggle }) => {
 
   const handleSave = async () => {
     try {
-      await axios.put(`http://localhost:8080/api/customers/${user.id}`, editedUser);
+      await axios.put(`http://localhost:8080/api/customers/${user.id}`, editedUser, {
+        auth: {
+          username: 'user', // Hardcoded username
+          password: 'password' // Hardcoded password
+        }
+      });
       setUser(editedUser);
       setIsEditing(false);
     } catch (error) {
@@ -49,17 +64,23 @@ const Dashboard = ({ theme, handleThemeToggle }) => {
   const handleProfilePictureUpload = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
-
+  
     setSelectedFile(file); // Update the selected file
-
+  
     const formData = new FormData();
     formData.append("file", file);
-
+  
     try {
       const response = await axios.post(
         `http://localhost:8080/api/customers/${user.id}/upload-profile-picture`,
         formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+          auth: {
+            username: 'user', // Hardcoded username
+            password: 'password' // Hardcoded password
+          }
+        }
       );
       setProfilePicture(`http://localhost:8080${response.data}`);
     } catch (error) {
@@ -69,7 +90,12 @@ const Dashboard = ({ theme, handleThemeToggle }) => {
 
   const handleRemoveProfilePicture = async () => {
     try {
-      await axios.delete(`http://localhost:8080/api/customers/${user.id}/remove-profile-picture`);
+      await axios.delete(`http://localhost:8080/api/customers/${user.id}/remove-profile-picture`, {
+        auth: {
+          username: 'user', // Hardcoded username
+          password: 'password' // Hardcoded password
+        }
+      });
       setProfilePicture(null);
       setSelectedFile(null); // Clear selected file
       setUser((prevUser) => ({ ...prevUser, profilePictureUrl: null }));

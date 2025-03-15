@@ -10,7 +10,15 @@ const UpcomingTours = ({ theme }) => {
       const storedUser = JSON.parse(localStorage.getItem("customer"));
       if (storedUser) {
         try {
-          const response = await axios.get(`http://localhost:8080/api/customers/${storedUser.id}/upcoming-tours`);
+          const response = await axios.get(
+            `http://localhost:8080/api/customers/${storedUser.id}/upcoming-tours`,
+            {
+              auth: {
+                username: 'user', // Hardcoded username
+                password: 'password' // Hardcoded password
+              }
+            }
+          );
           setUpcomingTours(response.data);
         } catch (error) {
           console.error("Error fetching upcoming tours:", error);

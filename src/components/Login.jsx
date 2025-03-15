@@ -8,24 +8,30 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  
-  // Get the theme from localStorage to ensure consistent theme
-  const theme = localStorage.getItem('theme') || 'light';
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8080/api/customers/login", { email, password });
+      const response = await axios.post(
+        "http://localhost:8080/api/customers/login",
+        { email, password },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure the content type is set
+          },
+        }
+      );
       localStorage.setItem("customer", JSON.stringify(response.data));
       navigate("/dashboard");
-    } catch {
+    } catch (error) {
+      console.error("Login error:", error);
       setError("Invalid credentials");
     }
   };
 
   return (
-    <div className={`login-container ${theme}`}>
-      <div className={`login-box ${theme}`}>
+    <div className="login-container">
+      <div className="login-box">
         <h2>Login</h2>
         {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleLogin}>

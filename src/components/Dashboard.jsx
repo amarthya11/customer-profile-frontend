@@ -9,7 +9,7 @@ const Dashboard = ({ theme, handleThemeToggle }) => {
   const [profilePicture, setProfilePicture] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState({});
-  const [selectedFile, setSelectedFile] = useState(null); // Track selected file
+  const [selectedFile, setSelectedFile] = useState(null); 
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -18,8 +18,8 @@ const Dashboard = ({ theme, handleThemeToggle }) => {
         try {
           const response = await axios.get(`http://localhost:8080/api/customers/${storedUser.id}`, {
             auth: {
-              username: 'user', // Hardcoded username
-              password: 'password' // Hardcoded password
+              username: 'user', 
+              password: 'password' 
             }
           });
           setUser(response.data);
@@ -27,8 +27,8 @@ const Dashboard = ({ theme, handleThemeToggle }) => {
     
           const picResponse = await axios.get(`http://localhost:8080/api/customers/${storedUser.id}/profile-picture`, {
             auth: {
-              username: 'user', // Hardcoded username
-              password: 'password' // Hardcoded password
+              username: 'user', 
+              password: 'password' 
             }
           });
           if (picResponse.data && picResponse.data !== "null") {
@@ -50,8 +50,8 @@ const Dashboard = ({ theme, handleThemeToggle }) => {
     try {
       await axios.put(`http://localhost:8080/api/customers/${user.id}`, editedUser, {
         auth: {
-          username: 'user', // Hardcoded username
-          password: 'password' // Hardcoded password
+          username: 'user', 
+          password: 'password' 
         }
       });
       setUser(editedUser);
@@ -65,7 +65,7 @@ const Dashboard = ({ theme, handleThemeToggle }) => {
     const file = event.target.files[0];
     if (!file) return;
   
-    setSelectedFile(file); // Update the selected file
+    setSelectedFile(file); 
   
     const formData = new FormData();
     formData.append("file", file);
@@ -77,8 +77,8 @@ const Dashboard = ({ theme, handleThemeToggle }) => {
         {
           headers: { "Content-Type": "multipart/form-data" },
           auth: {
-            username: 'user', // Hardcoded username
-            password: 'password' // Hardcoded password
+            username: 'user', 
+            password: 'password' 
           }
         }
       );
@@ -92,12 +92,12 @@ const Dashboard = ({ theme, handleThemeToggle }) => {
     try {
       await axios.delete(`http://localhost:8080/api/customers/${user.id}/remove-profile-picture`, {
         auth: {
-          username: 'user', // Hardcoded username
-          password: 'password' // Hardcoded password
+          username: 'user', 
+          password: 'password' 
         }
       });
       setProfilePicture(null);
-      setSelectedFile(null); // Clear selected file
+      setSelectedFile(null); 
       setUser((prevUser) => ({ ...prevUser, profilePictureUrl: null }));
     } catch (error) {
       console.error("Error removing profile picture:", error);
@@ -127,7 +127,7 @@ const Dashboard = ({ theme, handleThemeToggle }) => {
                       type="file"
                       accept="image/*"
                       onChange={handleProfilePictureUpload}
-                      style={{ display: "none" }} // Hide the default file input
+                      style={{ display: "none" }} 
                     />
                     <span className="file-name">
                       {selectedFile ? selectedFile.name : ""}
@@ -148,7 +148,7 @@ const Dashboard = ({ theme, handleThemeToggle }) => {
                       type="file"
                       accept="image/*"
                       onChange={handleProfilePictureUpload}
-                      style={{ display: "none" }} // Hide the default file input
+                      style={{ display: "none" }} 
                     />
                     <span className="file-name">
                       {selectedFile ? selectedFile.name : ""}

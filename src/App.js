@@ -30,7 +30,7 @@ const Navbar = ({ theme, handleThemeToggle, handleLogout }) => {
       </ul>
       <div className="navbar-buttons">
         <button onClick={handleThemeToggle} className="theme-toggle-btn">
-          {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+          {theme === "light" ? " Dark Mode" : " Light Mode"}
         </button>
         <button onClick={handleLogout} className="logout-btn">
           Logout
@@ -40,24 +40,22 @@ const Navbar = ({ theme, handleThemeToggle, handleLogout }) => {
   );
 };
 
-// Simplified navbar just for the login page
 const LoginNavbar = ({ theme, handleThemeToggle }) => {
   return (
     <nav className="navbar login-navbar">
       <div className="navbar-spacer"></div>
       <div className="navbar-buttons">
         <button onClick={handleThemeToggle} className="theme-toggle-btn">
-          {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
+          {theme === "light" ? " Dark Mode" : " Light Mode"}
         </button>
       </div>
     </nav>
   );
 };
 
-// This component will be inside the Router context
 const AppContent = () => {
   const [theme, setTheme] = useState(() => {
-    // Check if theme is saved in localStorage
+    // checking if theme is saved in localStorage
     const savedTheme = localStorage.getItem('theme');
     return savedTheme || 'light';
   });
@@ -66,7 +64,7 @@ const AppContent = () => {
 
   const handleThemeToggle = () => {
     const newTheme = theme === "light" ? "dark" : "light";
-    // Save theme preference to localStorage
+    // saving theme preference to localStorage
     localStorage.setItem('theme', newTheme);
     setTheme(newTheme);
   };
@@ -76,7 +74,6 @@ const AppContent = () => {
     navigate("/");
   };
 
-  // Check if we're on the login page
   const isLoginPage = location.pathname === "/";
 
   return (
@@ -106,7 +103,6 @@ const AppContent = () => {
   );
 };
 
-// Main App component that wraps everything with Router
 const App = () => {
   return (
     <Router>

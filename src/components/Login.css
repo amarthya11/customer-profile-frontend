@@ -1,4 +1,4 @@
-/* Center the login form */
+
 .login-container {
   background-color: #f5f5f5;
   display: flex;
@@ -24,7 +24,6 @@
   color: #333;
 }
 
-/* Input fields */
 .login-box input {
   width: 100%;
   padding: 12px;
@@ -53,7 +52,6 @@
   background-color: #0056b3;
 }
 
-/* Error message */
 .error-message {
   color: #dc3545;
   font-size: 14px;

@@ -14,8 +14,8 @@ const UpcomingTours = ({ theme }) => {
             `http://localhost:8080/api/customers/${storedUser.id}/upcoming-tours`,
             {
               auth: {
-                username: 'user', // Hardcoded username
-                password: 'password' // Hardcoded password
+                username: 'user', 
+                password: 'password' 
               }
             }
           );

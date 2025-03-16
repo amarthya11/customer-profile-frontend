@@ -17,7 +17,7 @@ const Login = () => {
         { email, password },
         {
           headers: {
-            "Content-Type": "application/json", // Ensure the content type is set
+            "Content-Type": "application/json", 
           },
         }
       );

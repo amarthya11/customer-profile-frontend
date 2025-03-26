@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../App.css";
+import PropTypes from 'prop-types';
 
 const UpcomingTours = ({ theme }) => {
   const [upcomingTours, setUpcomingTours] = useState([]);
@@ -65,6 +66,9 @@ const UpcomingTours = ({ theme }) => {
       </div>
     </div>
   );
+};
+UpcomingTours.propTypes = {
+  theme: PropTypes.string.isRequired
 };
 
 export default UpcomingTours;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Dashboard.css";
+import PropTypes from 'prop-types';
 
 const Dashboard = ({ theme, handleThemeToggle }) => {
   const navigate = useNavigate();
@@ -226,6 +227,11 @@ const Dashboard = ({ theme, handleThemeToggle }) => {
       )}
     </div>
   );
+};
+
+Dashboard.propTypes = {
+  theme: PropTypes.string.isRequired,
+  handleThemeToggle: PropTypes.func.isRequired
 };
 
 export default Dashboard;

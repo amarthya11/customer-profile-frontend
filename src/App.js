@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard";
 import UpcomingTours from "./components/UpcomingTours";
 import PastTours from "./components/PastTours";
 import "./App.css";
+import PropTypes from "prop-types";
 
 const Navbar = ({ theme, handleThemeToggle, handleLogout }) => {
   const location = useLocation();
@@ -40,6 +41,12 @@ const Navbar = ({ theme, handleThemeToggle, handleLogout }) => {
   );
 };
 
+Navbar.propTypes = {
+  theme: PropTypes.string.isRequired,          // Must be a string and required
+  handleThemeToggle: PropTypes.func.isRequired, // Must be a function and required
+  handleLogout: PropTypes.func.isRequired      // Must be a function and required
+};
+
 const LoginNavbar = ({ theme, handleThemeToggle }) => {
   return (
     <nav className="navbar login-navbar">
@@ -51,6 +58,11 @@ const LoginNavbar = ({ theme, handleThemeToggle }) => {
       </div>
     </nav>
   );
+};
+
+LoginNavbar.propTypes = {
+  theme: PropTypes.string.isRequired,          // Must be a string and required
+  handleThemeToggle: PropTypes.func.isRequired  // Must be a function and required
 };
 
 const AppContent = () => {
